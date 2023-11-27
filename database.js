@@ -5,7 +5,7 @@ const pool=new Pool({
     password:"post1234",
     host:"database-1.cwdtoy3mxidy.eu-north-1.rds.amazonaws.com",
     database:"books",
-    port:5402,
+    port:5432,
     ssl:true
 })
 
