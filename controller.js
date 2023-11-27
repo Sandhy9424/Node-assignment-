@@ -6,7 +6,7 @@ const pool = require('./database.js');
 const getBook=async (req, res) => {
   try {
     const client = await pool.connect();
-    const result = await client.query('SELECT * FROM books');
+    const result = await client.query('SELECT * FROM book');
     const books = result.rows;
     client.release();
     res.status(200).send(books);
@@ -21,7 +21,7 @@ const addBook= async (req, res) => {
     try {
       const client = await pool.connect();
       const result = await client.query(
-        'INSERT INTO books (name, author ) VALUES ($1, $2 )',
+        'INSERT INTO book (name, author ) VALUES ($1, $2 )',
         [title, author ]
       );
       client.release();
@@ -38,7 +38,7 @@ const updateBook= async (req, res) => {
     try {
       const client = await pool.connect();
       const result = await client.query(
-        'UPDATE books SET title = $1, author = $2 WHERE id = $3',
+        'UPDATE book SET name = $1, author = $2 WHERE id = $3',
         [title, author , bookId]
       );
       client.release();
@@ -53,7 +53,7 @@ const deleteBook=async (req, res) => {
   
     try {
       const client = await pool.connect();
-      const result = await client.query('DELETE FROM books WHERE id = $1', [bookId]);
+      const result = await client.query('DELETE FROM book WHERE id = $1', [bookId]);
       client.release();
       res.status(200).send(`Book with ID ${bookId} deleted successfully`);
     } catch (err) {
@@ -65,7 +65,7 @@ const getBookById=async (req, res) => {
 
   try {
     const client = await pool.connect();
-    const result = await client.query('SELECT * FROM books WHERE id = $1', [bookId]);
+    const result = await client.query('SELECT * FROM book WHERE id = $1', [bookId]);
     const book = result.rows[0];
     client.release();
 
