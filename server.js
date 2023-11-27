@@ -9,15 +9,15 @@ app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
-app.get('get-all-book',controller.getBook)
+app.get('/get-all-book',controller.getBook)
 
-app.post('add-book',controller.addBook)
+app.post('/add-book',controller.addBook)
 
-app.put('update-book',controller.updateBook)
+app.put('/update-book',controller.updateBook)
 
-app.delete('delete-book',controller.deleteBook)
+app.delete('/delete-book',controller.deleteBook)
 
-app.get('get-book',controller.getBookById)
+app.get('/get-book',controller.getBookById)
 
 
 app.listen(port, () => {
