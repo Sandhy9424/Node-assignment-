@@ -9,9 +9,9 @@ const getBook=async (req, res) => {
     const result = await client.query('SELECT * FROM books');
     const books = result.rows;
     client.release();
-    res.json(books);
+    res.status(200).send(books);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(500).send({ message: err.message });
   }
 };
 // POST method to add a new book
@@ -27,7 +27,7 @@ const addBook= async (req, res) => {
       client.release();
       res.status(201).send('Book added successfully');
     } catch (err) {
-      res.status(500).json({ message: err.message });
+      res.status(500).send({ message: err.message });
     }
   };
 // PUT method to update a book
@@ -42,9 +42,9 @@ const updateBook= async (req, res) => {
         [title, author , bookId]
       );
       client.release();
-      res.send(`Book with ID ${bookId} updated successfully`);
+      res.status(200).send(`Book with ID ${bookId} updated successfully`);
     } catch (err) {
-      res.status(500).json({ message: err.message });
+      res.status(500).send({ message: err.message });
     }
   };
    // DELETE method to delete a book
@@ -55,9 +55,9 @@ const deleteBook=async (req, res) => {
       const client = await pool.connect();
       const result = await client.query('DELETE FROM books WHERE id = $1', [bookId]);
       client.release();
-      res.send(`Book with ID ${bookId} deleted successfully`);
+      res.status(200).send(`Book with ID ${bookId} deleted successfully`);
     } catch (err) {
-      res.status(500).json({ message: err.message });
+      res.status(500).send({ message: err.message });
     }
   };
 const getBookById=async (req, res) => {
@@ -70,12 +70,12 @@ const getBookById=async (req, res) => {
     client.release();
 
     if (book) {
-      res.json(book);
+      res.status(200).send(book);
     } else {
-      res.status(404).json({ message: 'Book not found' });
+      res.status(404).send({ message: 'Book not found' });
     }
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(500).send({ message: err.message });
   }
 }
 
