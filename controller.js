@@ -33,7 +33,7 @@ const addBook= async (req, res) => {
 // PUT method to update a book
 const updateBook= async (req, res) => {
     const { title, author } = req.body;
-    const bookId = req.params.id;
+    const bookId = req.query.id;
   
     try {
       const client = await pool.connect();
@@ -49,7 +49,7 @@ const updateBook= async (req, res) => {
   };
    // DELETE method to delete a book
 const deleteBook=async (req, res) => {
-    const bookId = req.params.id;
+    const bookId = req.query.id;
   
     try {
       const client = await pool.connect();
@@ -61,7 +61,7 @@ const deleteBook=async (req, res) => {
     }
   };
 const getBookById=async (req, res) => {
-  const bookId = req.params.id;
+  const bookId = req.query.id;
 
   try {
     const client = await pool.connect();
